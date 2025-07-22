@@ -18,7 +18,8 @@
 template <typename T>
 void MergeSort(std::vector<T>& arr, int l, int r)
 {
-    std::vector<T> temp(r - l + 1);
+    std::vector<T> temp;
+    temp.reserve(r - l + 1);
     if (l >= r)
     {
         return ;
@@ -32,25 +33,25 @@ void MergeSort(std::vector<T>& arr, int l, int r)
     {
         if (arr[i] <= arr[j])
         {
-            temp[k ++ ] = std::move(arr[i ++ ]);      
+            temp.push_back(std::move(arr[i ++]));
         }       
         else    
         {
-            temp[k ++ ] = std::move(arr[j ++ ]);
+            temp.push_back(std::move(arr[j ++]));
         }
     }
     while (i <= mid)   
     {
-        temp[k ++ ] = std::move(arr[i ++ ]);
+        temp.push_back(std::move(arr[i ++]));
     }
     while (j <= r)      
     {
-        temp[k ++ ] = std::move(arr[j ++ ]);
+        temp.push_back(std::move(arr[j ++]));
     }
- 
-    for (int i = 0; i <= k; i ++ )  
+    int n = temp.size();
+    for (size_t k = 0; k < temp.size(); k ++ ) 
     {
-        arr[i + l] = std::move(tmp[i]);     
+        arr[l + k] = std::move(temp[k]);
     }
 }
 
@@ -70,7 +71,10 @@ void MergeSort_R(std::vector<T>& arr) {
             int i = left;    
             int j = mid;  
             int k = left;   
-            
+            if (mid >= right)
+            {
+                continue;
+            }
             while (i < mid && j < right) 
             {
                 if (arr[i] <= arr[j]) 
@@ -91,12 +95,8 @@ void MergeSort_R(std::vector<T>& arr) {
             {
                 temp[k++] = std::move(arr[j++]);
             }
-            
-            for (int i = 0; i <= k; i ++ )  
-            {
-                arr[i + l] = std::move(tmp[i]);     
-            }
         }
+        arr = temp;
     }
 }
 

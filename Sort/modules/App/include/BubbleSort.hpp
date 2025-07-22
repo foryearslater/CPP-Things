@@ -15,7 +15,7 @@
 #include <utility> 
 
 template <typename T>
-void BubbleSort(std::vector<int>& arr) 
+void BubbleSort(std::vector<T>& arr) 
 {
     int n = arr.size();
     bool flag ;

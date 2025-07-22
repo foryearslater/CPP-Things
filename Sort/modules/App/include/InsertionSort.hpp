@@ -22,10 +22,9 @@ void InsertionSort(std::vector<T>& arr)
     {
         T key = std::move(arr[i]);
         int j ;
-        for (j = i - 1; j >= 0 && arr[j] > key; j--)
+        for (j = i - 1; j >= 0 && arr[j] > key; j --)
         {
             arr[j + 1] = std::move(arr[j]);
-            j--;
         }
         arr[j + 1] = std::move(key);
     }

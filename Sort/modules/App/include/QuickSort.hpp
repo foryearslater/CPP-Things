@@ -9,8 +9,8 @@
  *
  */
 
-#ifndef QUICK_SORT_HPP
-#define QUICK_SORT_HPP
+#ifndef QUICK_SORT_R_HPP
+#define QUICK_SORT_R_HPP
 
 #include <vector>
 #include <utility>
@@ -67,4 +67,4 @@ void QuickSort_R(std::vector<T>& arr, int l, int r)
         if (l < j) stk.push({l, j});            
     }
 }
-#endif // QUICK_SORT_HPP
+#endif // QUICK_SORT_R_HPP
