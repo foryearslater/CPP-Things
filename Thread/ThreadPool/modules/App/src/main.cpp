@@ -8,12 +8,14 @@
 
 using namespace std::chrono_literals;
 
-class Task {
+class Task 
+{
 public:
 	virtual void Execute() = 0;
 };
 
-class MyThreadPool {
+class MyThreadPool 
+{
 public:
 	void StartThreads();
 
@@ -56,10 +58,15 @@ void MyThreadPool::AddTask(Task* a_task)
 	cv.notify_one();
 }
 
-class MyShowValueTask : public Task {
+class MyShowValueTask : public Task 
+{
 public:
-	MyShowValueTask(int value) { m_value = value; }
-	void Execute() override {
+	MyShowValueTask(int value) 
+	{ 
+		m_value = value; 
+	}
+	void Execute() override 
+	{
 		auto tid = std::this_thread::get_id();
 		std::stringstream ss;
 		ss << "ThreadID " << tid << ": " << m_value << std::endl;
