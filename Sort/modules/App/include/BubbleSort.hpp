@@ -1,7 +1,7 @@
 /**
  * @file   BubbleSort.hpp
  * @author nichenglong (2645931757@qq.com)
- * @brief  冒泡排序 模板类实现
+ * @brief  冒泡排序 模板函数实现
  * @version 0.1
  * @date 2025-07-22
  *
