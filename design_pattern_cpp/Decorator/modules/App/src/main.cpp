@@ -31,6 +31,5 @@ int main()
     std::cout << "  Description: " << anotherCoffee->GetDescription() << std::endl;
     std::cout << "  Cost: " << anotherCoffee->GetCost() << std::endl;
 
-
     return 0;
 }
