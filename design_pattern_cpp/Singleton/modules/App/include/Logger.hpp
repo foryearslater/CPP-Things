@@ -68,6 +68,7 @@ private:
 * @detail 在源文件中初始化静态成员 (在任何线程访问之前)
 * @detail 在程序启动时或类加载时就立即创建好唯一的实例，而不是等到第一次使用时才创建
 */
+
 Logger Logger::instance_Eager;
 
 
@@ -75,5 +76,6 @@ Logger Logger::instance_Eager;
 * @brief 懒汉式 (Eager Initialization)
 * @detail  只有在第一次调用 getInstance() 方法时才创建实例
 */
+
 Logger* Logger::instance_lazy = nullptr;
 #endif // LOGGER_H

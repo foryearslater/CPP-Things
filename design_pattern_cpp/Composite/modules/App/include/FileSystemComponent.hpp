@@ -31,4 +31,5 @@ public:
     virtual void Add(std::shared_ptr<FileSystemComponent> component) {}
 
     virtual void Remove(std::shared_ptr<FileSystemComponent> component) {}
+    
 };

@@ -25,6 +25,7 @@ Logger& Logger::GetInstanceLazy()
     {
         instance_lazy = new Logger();
     }
+    
     return instance_lazy;
 }
 
