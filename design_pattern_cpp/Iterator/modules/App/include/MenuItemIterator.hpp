@@ -10,15 +10,15 @@
 class MenuItemIterator : public Iterator
 {
 public:
-    explicit MenuItemIterator(const std::vector<MenuItem> &items);
+    explicit MenuItemIterator(const std::vector<MenuItem>& items);
 
     ~MenuItemIterator() override;
 
     bool HasNext() const override;
 
-    const MenuItem &Next() override;
+    const MenuItem& Next() override;
 
 private:
-    const std::vector<MenuItem> &m_items;
+    const std::vector<MenuItem>& m_items;
     mutable int m_position;
-}
+};

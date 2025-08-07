@@ -46,7 +46,6 @@ private:
 
 int main()
 {
-
     std::unique_ptr<DinerMenu> dinerMenu = std::make_unique<DinerMenu>();
 
     Waitress waitress(dinerMenu.get());

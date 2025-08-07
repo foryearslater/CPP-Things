@@ -23,6 +23,5 @@ void DinerMenu::AddItem(const std::string &name, const std::string &description,
 
 std::unique_ptr<Iterator> DinerMenu::CreateIterator() const
 {
-
     return std::make_unique<MenuItemIterator>(m_menuItems);
 }

@@ -1,5 +1,6 @@
 #include "MenuItem.hpp"
 #include <iomanip>
+#include <sstream> 
 
 MenuItem::MenuItem(const std::string &name, const std::string &description, bool vegetarian, double price)
     : m_name(name), m_description(description), m_vegetarian(vegetarian), m_price(price)
