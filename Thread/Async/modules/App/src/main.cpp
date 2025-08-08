@@ -5,13 +5,16 @@
 
 #define FIBO_NUM 50000000
 
-int64_t fibonacci(int64_t n) {
-	if (n <= 1) {
+int64_t fibonacci(int64_t n)
+{
+	if (n <= 1)
+	{
 		return n;
 	}
 
 	int64_t a = 0, b = 1;
-	for (int i = 2; i <= n; ++i) {
+	for (int i = 2; i <= n; ++i)
+	{
 		int64_t temp = a + b;
 		a = b;
 		b = temp;
@@ -20,16 +23,17 @@ int64_t fibonacci(int64_t n) {
 	return b;
 }
 
-void UsePromise() {
+void UsePromise()
+{
 	auto t0 = std::chrono::steady_clock::now();
 	std::promise<int64_t> pret;
-	std::thread calc_thread([&] {
+	std::thread calc_thread([&]
+							{
 		auto ret = fibonacci(FIBO_NUM);
-		pret.set_value(ret);
-		});
+		pret.set_value(ret); });
 	std::future<int64_t> fret = pret.get_future();
 	auto t1 = std::chrono::steady_clock::now();
-	
+
 	int64_t real_answer = fret.get();
 
 	auto t2 = std::chrono::steady_clock::now();
@@ -43,12 +47,14 @@ void UsePromise() {
 	calc_thread.join();
 }
 
-int main() {
+int main()
+{
 
 	UsePromise();
 
 	auto t0 = std::chrono::steady_clock::now();
-	std::future<int64_t> future_answer = std::async([&] {return fibonacci(FIBO_NUM);});
+	std::future<int64_t> future_answer = std::async([&]
+													{ return fibonacci(FIBO_NUM); });
 	auto t1 = std::chrono::steady_clock::now();
 
 	// future_answer.wait_for();
@@ -63,6 +69,6 @@ int main() {
 
 	std::cout << "time1 takes " << time1 << "ms" << std::endl;
 	std::cout << "time2 takes " << time2 << "ms" << std::endl;
-	
-    return 0;
+
+	return 0;
 }
