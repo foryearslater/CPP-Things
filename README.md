@@ -73,9 +73,9 @@
 
 ## **4.数据结构**
 
-[**二叉搜索树**](https://github.com/foryearslater/CPP-Things/tree/main/Tree/BSTree)
+[**二叉搜索树**](https://github.com/foryearslater/CPP-Things/tree/main/Data_structure/BSTree)
 
-[**平衡二叉树**](https://github.com/foryearslater/CPP-Things/tree/main/Tree/AVLTree)
+[**平衡二叉树**](https://github.com/foryearslater/CPP-Things/tree/main/Data_structure/AVLTree)
 
-[红黑树](https://github.com/foryearslater/CPP-Things/tree/main/Tree/RBTree)
+[红黑树](https://github.com/foryearslater/CPP-Things/tree/main/Data_structure/RBTree)
 
