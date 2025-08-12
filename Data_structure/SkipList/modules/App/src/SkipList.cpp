@@ -16,22 +16,23 @@ SkipListNode<TKey, TValue>::~SkipListNode()
 
 template <typename TKey, typename TValue>
 SkipList<TKey, TValue>::SkipList()
+    : level(0),
+      head(new SkipListNode<TKey, TValue>(std::numeric_limits<TKey>::min(), TValue(), MAX_LEVEL)),
+      rng(std::chrono::high_resolution_clock::now().time_since_epoch().count()),
+      dist(0.0, 1.0)
 {
-    :   level(0), 
-        head(new SkipListNode<TKey, TValue>(std::numeric_limits<TKey>::min(), TValue(), MAX_LEVEL)), 
-        rng(std::chrono::high_resolution_clock::now().time_since_epoch().count()),
     std::cout << "SkipList created. Max Level: " << MAX_LEVEL << ", Probability P: " << P << std::endl;
 }
 
 template <typename TKey, typename TValue>
 SkipList<TKey, TValue>::~SkipList()
 {
-    SkipListNode<TKey, TValue> *current = head->forward[0];
-    while (current != nullptr)
+    SkipListNode<TKey, TValue> *cur = head->forward[0];
+    while (cur != nullptr)
     {
-        SkipListNode<TKey, TValue> *next = current->forward[0];
-        delete current;
-        current = next;
+        SkipListNode<TKey, TValue> *next = cur->forward[0];
+        delete cur;
+        cur = next;
     }
     delete head;
     std::cout << "SkipList destroyed." << std::endl;
@@ -46,32 +47,32 @@ SkipListNode<TKey, TValue> *SkipList<TKey, TValue>::CreateNode(TKey key, TValue 
 template <typename TKey, typename TValue>
 int SkipList<TKey, TValue>::RandomLevel()
 {
-    int newLevel = 0;
-    while (dist(rng) < P && newLevel < MAX_LEVEL)
+    int new_level = 0;
+    while (dist(rng) < P && new_level < MAX_LEVEL)
     {
-        newLevel++;
+        new_level++;
     }
-    return newLevel;
+    return new_level;
 }
 
 template <typename TKey, typename TValue>
 bool SkipList<TKey, TValue>::Search(TKey key, TValue &value)
 {
-    SkipListNode<TKey, TValue> *current = head;
+    SkipListNode<TKey, TValue> *cur = head;
 
     for (int i = level; i >= 0; i--)
     {
-        while (current->forward[i] != nullptr && current->forward[i]->key < key)
+        while (cur->forward[i] != nullptr && cur->forward[i]->key < key)
         {
-            current = current->forward[i];
+            cur = cur->forward[i];
         }
     }
 
-    current = current->forward[0];
+    cur = cur->forward[0];
 
-    if (current != nullptr && current->key == key)
+    if (cur != nullptr && cur->key == key)
     {
-        value = current->value;
+        value = cur->value;
         return true;
     }
 
@@ -82,40 +83,40 @@ template <typename TKey, typename TValue>
 bool SkipList<TKey, TValue>::Insert(TKey key, TValue value)
 {
     std::vector<SkipListNode<TKey, TValue> *> update(MAX_LEVEL + 1, nullptr);
-    SkipListNode<TKey, TValue> *current = head;
+    SkipListNode<TKey, TValue> *cur = head;
 
     for (int i = level; i >= 0; i--)
     {
-        while (current->forward[i] != nullptr && current->forward[i]->key < key)
+        while (cur->forward[i] != nullptr && cur->forward[i]->key < key)
         {
-            current = current->forward[i];
+            cur = cur->forward[i];
         }
-        update[i] = current;
+        update[i] = cur;
     }
 
-    current = current->forward[0];
-    if (current != nullptr && current->key == key)
+    cur = cur->forward[0];
+    if (cur != nullptr && cur->key == key)
     {
         return false;
     }
 
-    int newLevel = randomLevel();
+    int new_level = RandomLevel();
 
-    if (newLevel > level)
+    if (new_level > level)
     {
-        for (int i = level + 1; i <= newLevel; i++)
+        for (int i = level + 1; i <= new_level; i++)
         {
             update[i] = head;
         }
-        level = newLevel;
+        level = new_level;
     }
 
-    SkipListNode<TKey, TValue> *newNode = createNode(key, value, newLevel);
+    SkipListNode<TKey, TValue> *new_node = CreateNode(key, value, new_level);
 
-    for (int i = 0; i <= newLevel; i++)
+    for (int i = 0; i <= new_level; i++)
     {
-        newNode->forward[i] = update[i]->forward[i];
-        update[i]->forward[i] = newNode;
+        new_node->forward[i] = update[i]->forward[i];
+        update[i]->forward[i] = new_node;
     }
 
     return true;
@@ -125,32 +126,32 @@ template <typename TKey, typename TValue>
 bool SkipList<TKey, TValue>::Delete(TKey key)
 {
     std::vector<SkipListNode<TKey, TValue> *> update(MAX_LEVEL + 1, nullptr);
-    SkipListNode<TKey, TValue> *current = head;
+    SkipListNode<TKey, TValue> *cur = head;
 
     for (int i = level; i >= 0; i--)
     {
-        while (current->forward[i] != nullptr && current->forward[i]->key < key)
+        while (cur->forward[i] != nullptr && cur->forward[i]->key < key)
         {
-            current = current->forward[i];
+            cur = cur->forward[i];
         }
-        update[i] = current;
+        update[i] = cur;
     }
 
-    current = current->forward[0];
-    if (current == nullptr || current->key != key)
+    cur = cur->forward[0];
+    if (cur == nullptr || cur->key != key)
     {
         return false;
     }
 
     for (int i = 0; i <= level; i++)
     {
-        if (update[i]->forward[i] == current)
+        if (update[i]->forward[i] == cur)
         {
-            update[i]->forward[i] = current->forward[i];
+            update[i]->forward[i] = cur->forward[i];
         }
     }
 
-    delete current;
+    delete cur;
 
     while (level > 0 && head->forward[level] == nullptr)
     {
