@@ -5,13 +5,15 @@
 
 using namespace std::chrono_literals;
 
-void WorkThread() {
-   
-    std::this_thread::sleep_for(200ms);
-    WorkThread();
+void WorkThread()
+{
+
+	std::this_thread::sleep_for(200ms);
+	WorkThread();
 }
 
-int main(){
+int main()
+{
 
 	std::thread th1(WorkThread);
 	std::thread th2(WorkThread);
@@ -23,5 +25,5 @@ int main(){
 	th3.join();
 	th4.join();
 
-    return 0;
+	return 0;
 }
