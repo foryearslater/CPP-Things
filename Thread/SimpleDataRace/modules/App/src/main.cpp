@@ -6,20 +6,22 @@
 
 using namespace std::chrono_literals;
 
-#define ADD_COUNT 100000000 
+#define ADD_COUNT 100000000
 
 int race_data = 0;
 std::atomic<int> atom_race_data = 0;
 std::mutex mutex;
 
-void ThreadWrite() {
+void ThreadWrite()
+{
 	for (int i = 0; i < ADD_COUNT; ++i)
 	{
 		race_data++;
 	}
 }
 
-void ThreadSafeWrite1() {
+void ThreadSafeWrite1()
+{
 	race_data = 0;
 	mutex.lock();
 	for (int i = 0; i < ADD_COUNT; ++i)
@@ -29,7 +31,8 @@ void ThreadSafeWrite1() {
 	mutex.unlock();
 }
 
-void ThreadSafeWrite2() {
+void ThreadSafeWrite2()
+{
 	for (int i = 0; i < ADD_COUNT; ++i)
 	{
 		mutex.lock();
@@ -38,7 +41,8 @@ void ThreadSafeWrite2() {
 	}
 }
 
-void ThreadSafeWrite3() {
+void ThreadSafeWrite3()
+{
 	atom_race_data.store(0);
 	for (int i = 0; i < ADD_COUNT; ++i)
 	{
@@ -46,11 +50,12 @@ void ThreadSafeWrite3() {
 	}
 }
 
-int main() {
-	//std::thread th1(ThreadWrite);
-	//std::thread th2(ThreadWrite);
-	//std::thread th1(ThreadSafeWrite1);
-	//std::thread th2(ThreadSafeWrite1);
+int main()
+{
+	// std::thread th1(ThreadWrite);
+	// std::thread th2(ThreadWrite);
+	// std::thread th1(ThreadSafeWrite1);
+	// std::thread th2(ThreadSafeWrite1);
 	std::thread th1(ThreadSafeWrite2);
 	std::thread th2(ThreadSafeWrite2);
 

@@ -6,36 +6,41 @@ std::mutex mutex1;
 std::mutex mutex2;
 std::mutex mutex3;
 
-void Bar() {
+void Bar()
+{
 	mutex1.lock();
 	mutex1.unlock();
 }
 
-void Foo() {
+void Foo()
+{
 	mutex1.lock();
 	Bar();
 	mutex1.unlock();
 }
 
-void Work1() {
+void Work1()
+{
 	for (int i = 0; i < 1000; ++i)
 	{
-		//mutex1.lock(); mutex2.lock();
-		//mutex2.unlock(); mutex1.unlock();
+		// mutex1.lock(); mutex2.lock();
+		// mutex2.unlock(); mutex1.unlock();
 		std::scoped_lock sl(mutex1, mutex2);
 	}
 }
 
-void Work2() {
+void Work2()
+{
 	for (int i = 0; i < 1000; ++i)
 	{
-		//mutex2.lock(); mutex1.lock();
-		//mutex1.unlock(); mutex2.unlock();
+		// mutex2.lock(); mutex1.lock();
+		// mutex1.unlock(); mutex2.unlock();
 		std::scoped_lock sl(mutex2, mutex1);
 	}
 }
 
-int main() {
+int main()
+{
 	std::jthread th1(Work1);
 	std::jthread th2(Work2); // Work1, Work2;
 
