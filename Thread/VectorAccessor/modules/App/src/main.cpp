@@ -53,7 +53,10 @@ MTVectorModifier MTVector::GetModifier()
 
 void MTVectorModifier::SetValue(int index, double a_value)
 {
-	mt_vector->m_values.push_back(a_value);
+	if (index >= 0 && index < mt_vector->m_values.size())
+	{
+		mt_vector->m_values.at(index) = a_value;
+	}
 }
 
 int main() {
