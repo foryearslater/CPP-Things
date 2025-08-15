@@ -1,21 +1,21 @@
 #include <iostream>
 #include <mutex>
 
-using namespace std::chrono_literals;
-
 std::timed_mutex mutex;
 
-void Work1() {
+void Work1()
+{
 	std::unique_lock ulock(mutex, std::defer_lock);
 	ulock.lock();
 	std::cout << "Work1 Locked" << std::endl;
-	std::this_thread::sleep_for(3s);
+	std::this_thread::sleep_for(std::chrono::seconds(3));
 	std::cout << "Work1 To Die" << std::endl;
 }
 
-void Work2() {
+void Work2()
+{
 	std::unique_lock ulock(mutex, std::defer_lock);
-	if (ulock.try_lock_for(1s))
+	if (ulock.try_lock_for(std::chrono::seconds(1)))
 	{
 		std::cout << "Work2 Locked" << std::endl;
 	}
@@ -25,9 +25,10 @@ void Work2() {
 	}
 }
 
-void Work3() {
+void Work3()
+{
 	std::unique_lock ulock(mutex, std::defer_lock);
-	if (ulock.try_lock_for(4s))
+	if (ulock.try_lock_for(std::chrono::seconds(4)))
 	{
 		std::cout << "Work3 Locked" << std::endl;
 	}
@@ -37,10 +38,11 @@ void Work3() {
 	}
 }
 
-int main() {
+int main()
+{
 	std::jthread th1(Work1);
 
-	std::this_thread::sleep_for(200ms);
+	std::this_thread::sleep_for(std::chrono::milliseconds(200));
 
 	std::jthread th2(Work2);
 	std::jthread th3(Work3);
