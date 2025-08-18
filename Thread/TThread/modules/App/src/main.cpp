@@ -25,7 +25,7 @@ protected:
 
 private:
 	std::thread m_thread;
-	std::atomic<bool> m_exit{ false };
+	std::atomic<bool> m_exit{false};
 };
 
 class TMyThread : public TThread
@@ -50,17 +50,21 @@ void TMyThread::DoExecute()
 
 class MyDocument;
 
-class SaveFileThread : public TThread {
+class SaveFileThread : public TThread
+{
 public:
 	void SetSavePath() {};
 	void SetDocument() {};
+
 protected:
-	void DoExecute() override {
-		//m_document->SaveToFile(m_file_name); 
+	void DoExecute() override 
+	{
+		// m_document->SaveToFile(m_file_name);
 	};
+
 private:
 	std::string m_file_name;
-	MyDocument* m_document;
+	MyDocument *m_document;
 };
 
 int main()
