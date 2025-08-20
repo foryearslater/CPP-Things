@@ -8,6 +8,8 @@
  * @copyright Copyright (c) 2025
  *
  */
+
+#pragma once
 #ifndef INSERTION_SORT_HPP
 #define INSERTION_SORT_HPP
 
@@ -15,14 +17,14 @@
 #include <utility>
 
 template <typename T>
-void InsertionSort(std::vector<T>& arr) 
+void InsertionSort(std::vector<T> &arr)
 {
     int n = arr.size();
-    for (int i = 1; i < n; i ++) 
+    for (int i = 1; i < n; i++)
     {
         T key = std::move(arr[i]);
-        int j ;
-        for (j = i - 1; j >= 0 && arr[j] > key; j --)
+        int j;
+        for (j = i - 1; j >= 0 && arr[j] > key; j--)
         {
             arr[j + 1] = std::move(arr[j]);
         }

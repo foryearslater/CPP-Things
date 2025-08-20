@@ -9,6 +9,7 @@
  *
  */
 
+#pragma once
 #ifndef QUICK_SORT_R_HPP
 #define QUICK_SORT_R_HPP
 

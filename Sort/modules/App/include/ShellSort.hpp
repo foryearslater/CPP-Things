@@ -9,6 +9,7 @@
  *
  */
 
+#pragma once
 #ifndef SHELL_SORT_HPP
 #define SHELL_SORT_HPP
 
@@ -16,12 +17,12 @@
 #include <utility>
 
 template <typename T>
-void ShellSort(std::vector<T>& arr) 
+void ShellSort(std::vector<T> &arr)
 {
     int n = arr.size();
-    for (int gap = n / 2; gap > 0; gap /= 2) 
+    for (int gap = n / 2; gap > 0; gap /= 2)
     {
-        for (int i = gap; i < n; ++i) 
+        for (int i = gap; i < n; ++i)
         {
             T temp = std::move(arr[i]);
             int j;

@@ -8,13 +8,15 @@
  * @copyright Copyright (c) 2025
  *
  */
+
+#pragma once
 #ifndef cntING_SORT_HPP
 #define cntING_SORT_HPP
 
 #include <vector>
-#include <algorithm> 
+#include <algorithm>
 
-void CountingSort(std::vector<int>& arr) 
+void CountingSort(std::vector<int> &arr)
 {
     int max = *std::max_element(arr.begin(), arr.end());
     int min = *std::min_element(arr.begin(), arr.end());
@@ -27,11 +29,11 @@ void CountingSort(std::vector<int>& arr)
     {
         cnt[num - min]++;
     }
-    for (int i = 1; i < range; ++i) 
+    for (int i = 1; i < range; ++i)
     {
         cnt[i] += cnt[i - 1];
     }
-    for (int i = arr.size() - 1; i >= 0; --i) 
+    for (int i = arr.size() - 1; i >= 0; --i)
     {
         ans[cnt[arr[i] - min] - 1] = arr[i];
         cnt[arr[i] - min]--;

@@ -9,6 +9,7 @@
  *
  */
 
+#pragma once
 #ifndef HEAP_SORT_HPP
 #define HEAP_SORT_HPP
 
@@ -16,7 +17,8 @@
 #include <utility>
 
 template <typename T>
-void Heap(std::vector<T>& arr, int n, int i) {
+void Heap(std::vector<T> &arr, int n, int i)
+{
     int x = i;
     int l = 2 * i + 1;
     int r = 2 * i + 2;
@@ -28,21 +30,21 @@ void Heap(std::vector<T>& arr, int n, int i) {
     {
         x = r;
     }
-    if (x != i) 
+    if (x != i)
     {
         std::swap(arr[i], arr[x]);
         Heap(arr, n, x);
     }
 }
 template <typename T>
-void HeapSort(std::vector<T>& arr) 
+void HeapSort(std::vector<T> &arr)
 {
     int n = arr.size();
-    for (int i = n / 2 - 1; i >= 0; i --) 
+    for (int i = n / 2 - 1; i >= 0; i--)
     {
         Heap(arr, n, i);
     }
-    for (int i = n - 1; i > 0; i --) 
+    for (int i = n - 1; i > 0; i--)
     {
         std::swap(arr[0], arr[i]);
         Heap(arr, i, 0);

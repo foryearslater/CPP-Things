@@ -9,28 +9,29 @@
  *
  */
 
+#pragma once
 #ifndef BUBBLE_SORT_HPP
 #define BUBBLE_SORT_HPP
 #include <vector>
-#include <utility> 
+#include <utility>
 
 template <typename T>
-void BubbleSort(std::vector<T>& arr) 
+void BubbleSort(std::vector<T> &arr)
 {
     int n = arr.size();
-    bool flag ;
-    for (int i = 0; i < n - 1; i ++) 
+    bool flag;
+    for (int i = 0; i < n - 1; i++)
     {
         flag = false;
-        for (int j = 0; j < n - 1 - i; j ++) 
+        for (int j = 0; j < n - 1 - i; j++)
         {
-            if (arr[j] > arr[j + 1]) 
+            if (arr[j] > arr[j + 1])
             {
                 std::swap(arr[j], arr[j + 1]);
                 flag = true;
             }
         }
-        if (false == flag) 
+        if (false == flag)
         {
             break;
         }
