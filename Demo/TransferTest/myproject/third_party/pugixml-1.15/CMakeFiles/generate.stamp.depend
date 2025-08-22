@@ -1,0 +1,9 @@
+# CMake generation dependency list for this directory.
+D:/Software/share/cmake-4.0/Modules/BasicConfigVersion-SameMajorVersion.cmake.in
+D:/Software/share/cmake-4.0/Modules/CMakeDependentOption.cmake
+D:/Software/share/cmake-4.0/Modules/CMakePackageConfigHelpers.cmake
+D:/Software/share/cmake-4.0/Modules/GNUInstallDirs.cmake
+D:/Software/share/cmake-4.0/Modules/WriteBasicConfigVersionFile.cmake
+D:/workspace/test/myproject/third_party/pugixml-1.15/CMakeLists.txt
+D:/workspace/test/myproject/third_party/pugixml-1.15/scripts/pugixml-config.cmake.in
+D:/workspace/test/myproject/third_party/pugixml-1.15/scripts/pugixml.pc.in
