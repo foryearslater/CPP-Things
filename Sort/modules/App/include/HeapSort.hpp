@@ -43,7 +43,7 @@ void HeapSort(std::vector<T> &arr)
     for (int i = n / 2 - 1; i >= 0; i--)
     {
         Heap(arr, n, i);
-    }
+    }-
     for (int i = n - 1; i > 0; i--)
     {
         std::swap(arr[0], arr[i]);
